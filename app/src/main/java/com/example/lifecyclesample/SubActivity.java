@@ -1,6 +1,5 @@
 package com.example.lifecyclesample;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,14 +10,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class SubActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("LifeCycleSample","Main onCrete() called.");
+        Log.i("LifeCycleSample","Sub onCreate() called");
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sub);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -28,31 +27,31 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onStart(){
-        Log.i("LifeCycleSample","Main onStart() called.");
+        Log.i("LifeCycleSample","Sub onStart() called.");
         super.onStart();
     }
 
     @Override
     public void onRestart(){
-        Log.i("LifeCycleSample","Main onRestart() called.");
+        Log.i("LifeCycleSample","Sub onRestart() called.");
         super.onRestart();
     }
 
     @Override
     public void onResume(){
-        Log.i("LifeCycleSample","Main onResume() called");
+        Log.i("LifeCycleSample","Sub onResume() called");
         super.onResume();
     }
 
     @Override
     public void onPause(){
-        Log.i("LifeCycleSample","Main onPause() called");
+        Log.i("LifeCycleSample","Sub onPause() called");
         super.onPause();
     }
 
     @Override
     public void onStop(){
-        Log.i("LifeCycleSample","Main onStop() called");
+        Log.i("LifeCycleSample","Sub onStop() called");
         super.onStop();
     }
 
@@ -62,11 +61,9 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    //[次の画面を表示]ボタンがタップされたときの処理。
+    //[前の画面を表示]ボタンがタップされたときの処理。
     public void onButtonClick(View view){
-        //インテントオブジェクトを用意。
-        Intent intent = new Intent(MainActivity.this,SubActivity.class);
-        //アクティビティを起動。
-        startActivity(intent);
+        //このアクティビティを終了
+        finish();
     }
 }
